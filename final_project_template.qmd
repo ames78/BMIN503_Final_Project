@@ -1,7 +1,7 @@
 ---
-title: "Your Title"
+title: "RNA Sequencing in Pulmonary Arterial Hypertension"
 subtitle: "BMIN503/EPID600 Final Project"
-author: "FirstName LastName"
+author: "Amber Meservey"
 format: html
 editor: visual
 number-sections: true
@@ -15,6 +15,8 @@ Use this template to complete your project throughout the course. Your Final Pro
 ## Overview {#sec-overview}
 
 Give a brief a description of your project and its goal(s), what data you are using to complete it, and what two faculty/staff in different fields you have spoken to about your project with a brief summary of what you learned from each person. Include a link to your final project GitHub repository.
+
+Pulmonary arterial hypertension (PAH). is a disease characterized by pathologically increased pressures in the pulmonary vascular bed. Despite recent treatment advances, the disease remains associated with considerable morbidity and mortality. Currently disease diagnosis and prognosis relies simultaneously on invasive hemodynamic measurements and crude clinical associations. Accordingly, there is considerable interest in developing biomarkers for use in diagnosing, distinguishing subtype, treating and following treatment response in (PAH). Our group has previously looked at plasma protein biomarkers in a small clinical trial population of 84 participants with pulmonary arterial hypertension. The proposed project expands on this prior work by examining RNA sequencing in whole blood samples collected from participants at 2 time points during the trial.
 
 ## Introduction {#sec-introduction}
 
