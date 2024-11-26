@@ -1,0 +1,88 @@
+---
+title: "README"
+format: html
+editor: visual
+---
+
+## README
+
+Necessary packages include:
+
+```{r}
+library(dplyr)
+library(broom)
+library(limma)
+library(ggplot2)
+library(tidyverse)
+library(ggrepel)
+library(reshape2)
+library(lme4)
+```
+
+Original Files:
+
+```{r}
+There are 3 original files: 
+
+RNAdemo = Demographics only 
+RNAids = ID numbers only 
+TPMcounts = TPM normalized RNA sequencing counts 
+```
+
+Transformed Dataframes:
+
+```{r}
+These are modified (transposed, labels exchanged and log transformed) to become the following key dataframes:
+
+TPMcounts_t = transposed TPM dataframe
+TPMcounts_t_log2 = transposed and log2-transformed TPM dataframe
+TPMcounts = original TPM count dataframe
+TPMcounts_log2 = log2-transformed TPM DataFrame
+logexpressionmatrix = TPMcounts_log2 without any non-numerical info
+merged = clinical info and transposed log2-transformed TPM RNA data 
+
+RNAdemodup = RNAdemo sheet duplicated by pt in order to add # kit_number for merge
+
+clininfo = RNAdemodup + RNAids (merging on kit_number), also subsetted for only variables of interest 
+
+kit_numbers_to_remove = Remove kits that didn't meet QC 
+```
+
+Key Analysis Workflows (Duplicated x 4 for different analyses):
+
+```{r}
+## The following is repeated x 4 - changing analysis (1,2,3,4), fit (f,g2, h3, i4), results (f, g2, h3, i4) suffices accordingly. Adjusted BH p values <0.05 used to account for multiple comparisons. 
+
+## Define variables of interest and create analysis dataframe
+analysis1 <- model.matrix (~ treatment + gender + visit)
+colnames(analysis1) <- c("") 
+
+## Fit Linear Model
+fit_f <- lmFit(logexpressionmatrix, analysis1)
+
+## Apply Empirical Bayes Moderation: Stabilizes variance 
+fit_f <- eBayes(fit_f)
+
+## Fit Results
+results_f 
+
+## Filter Significance by Benjamini-Hochberg Correction for Multiple Comparisons
+results_f$Significant <- ifelse(results_f$adj.P.Val <= 0.05, "Significant", "Not Significant")
+
+## Volcano Plot for Treatment Arm:  
+ggplot(results_f, aes(x = logFC, y = -log10(P.Value), color = Significant))
+
+```
+
+```{r}
+Variable Definitions: 
+Treatment: Placebo = 1, Active = 2
+Sex: Male = 1, Female = 2
+Age: Continuous, years
+BMI: Continuous, kg/m2
+```
+
+```{r}
+Models: 
+  Linear *** 
+```
