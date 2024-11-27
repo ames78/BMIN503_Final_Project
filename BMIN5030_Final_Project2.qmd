@@ -53,6 +53,17 @@ Explain why your problem is interdisciplinary, what fields can contribute to its
 
 Describe the data used and general methodological approach used to address the problem described in the @sec-introduction. Subsequently, incorporate full R code necessary to retrieve and clean data, and perform analysis. Be sure to include a description of code so that others (including your future self) can understand what you are doing and why.
 
+```{r}
+### Need to work on me (and also README.)
+### Should we do lmer instead?
+## Aim 1: Differential expression analysis by treatment arm (binary, active drug X vs placebo). Will use a linear model to assess whether there is a correlation between RNA expression and treatment arm, adjusting for sex and visit number in the model. I will be adjusting for both of these in all analyses because the clinical trial used a sex stratification sampling method and because there are two different visit numbers. 
+
+## Aim 2: Differential expression analysis by sex (binary, self-reported male vs female).
+## Aim 3: Differential expression analysis by age (continuous, in years).
+## Aim 4: Differential expression analysis by BMI (continuous, in kg/m2).
+## Aim 5: Complete PCA, UMAP, pathway analysis, enrichment analysis for whichever aim returns most DEGs.
+```
+
 ## Load Pacakges
 
 ```{r, echo = FALSE}
@@ -65,6 +76,7 @@ library(tidyverse)
 library(ggrepel)
 library(reshape2)
 library(lme4)
+library(lmerTest)
 
 ```
 
@@ -166,7 +178,7 @@ ggplot(data.frame(all_values_log), aes(x = all_values_log)) +
   theme_minimal()
 ```
 
-## Combine log-TPM RNA expression with clinical info. 
+## Combine log-TPM RNA expression with clinical info.
 
 ```{r}
 ## Add kit_number:
@@ -189,7 +201,7 @@ write.csv(merged, "merged.csv")
 
 ```
 
-## Update Expression Matrix for Use in DEG 
+## Update Expression Matrix for Use in DEG
 
 ```{r}
 
@@ -203,9 +215,9 @@ logexpressionmatrix <- TPMcounts_log
 
 ```
 
-## Analysis 1: DEG for Treatment Arm Adjusted by Sex and Visit 
+## Analysis 1: DEG for Treatment Arm Adjusted by Sex and Visit
 
-```{r}
+```{r, echo= FALSE}
 ## Does expression of any RNA transcripts differ by treatment arm 1 vs. 2?
 ## Define Variables of Interest, Analysis DF
 treatment <- factor(merged$arm)
@@ -241,7 +253,7 @@ ggplot(results_f, aes(x = logFC, y = -log10(P.Value), color = Significant)) +
 
 ```
 
-## Analysis 2: DEG for 
+## Analysis 2: DEG for
 
 ## Results {#sec-results}
 
@@ -265,7 +277,7 @@ ggplot(results_f, aes(x = logFC, y = -log10(adj.P.Val), color = Significant)) +
   theme(legend.title = element_blank())
 ```
 
-## Analysis 2: Differential Expression by Sex Adjusted by Visit 
+## Analysis 2: Differential Expression by Sex Adjusted by Visit
 
 ```{r}
 ## Does expression of any RNA transcripts differ by sex (binary, self-reported male vs. female)?
