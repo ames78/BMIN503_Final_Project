@@ -10,61 +10,45 @@ embed-resources: true
 
 ------------------------------------------------------------------------
 
-Use this template to complete your project throughout the course. Your Final Project presentation will be based on the contents of this document. Replace the title/name above and text below with your own, but keep the headers. Feel free to change the theme and other display settings, although this is not required. I added a new sentence
-
 ## Overview {#sec-overview}
 
-Give a brief a description of your project and its goal(s), what data you are using to complete it, and what two faculty/staff in different fields you have spoken to about your project with a brief summary of what you learned from each person. Include a link to your final project GitHub repository.
+Pulmonary arterial hypertension (PAH). is a disease characterized by pathologically increased pressures in the pulmonary vascular bed. Despite recent treatment advances, the disease remains associated with considerable morbidity and mortality. Currently disease diagnosis and prognosis relies simultaneously on invasive hemodynamic measurements and crude clinical associations. Accordingly, there is considerable interest in developing biomarkers for use in diagnosing, distinguishing subtype, treating and following treatment response in (PAH). Our group has previously looked at plasma protein biomarkers in a small clinical trial population of participants with pulmonary arterial hypertension. The next phase of our project expands on this prior work by examining RNA sequencing in whole blood samples collected from participants at 2 time points during the trial. I will use this project as an opportunity to work through an RNA sequencing workflow correlating RNA to basic demographic variables (age, BMI, gender) prior to work looking more specific markers of interest (6MWD, TAPSE, REVEAL score). This will allow me to work with the dataset without publishling results of interest.
 
-```{r}
-## Pulmonary arterial hypertension (PAH). is a disease characterized by pathologically increased pressures in the pulmonary vascular bed. Despite recent treatment advances, the disease remains associated with considerable morbidity and mortality. Currently disease diagnosis and prognosis relies simultaneously on invasive hemodynamic measurements and crude clinical associations. Accordingly, there is considerable interest in developing biomarkers for use in diagnosing, distinguishing subtype, treating and following treatment response in (PAH). Our group has previously looked at plasma protein biomarkers in a small clinical trial population of participants with pulmonary arterial hypertension. The next phase of our  project expands on this prior work by examining RNA sequencing in whole blood samples collected from participants at 2 time points during the trial. I will use this project as an opportunity to work through an RNA sequencing workflow correlating RNA to basic demographic variables (age, BMI, gender) prior to work looking more specific markers of interest (6MWD, TAPSE, REVEAL score). This will allow me to work with the dataset without publishling results of interest. 
+The two faculty/staff I've met with regarding this project are Dr. Steven Kawut in Pulmonary Hypertension and Dr. Rui Feng in Biostatistics. Dr. Kawut would be considered my content expert, as he is a master clinician-researcher in PAH, as well as the lead on this clinical trial. He helps to direct appropriate clinical questions being asked of this data. Dr Rui Feng has expertise in RNA sequencing methods as well as statistical methods informing their use. She has been helpful in helping me understand how to format and use appropriate packages for this data.
 
-## The two faculty/staff I've met with regarding this project are Dr. Steven Kawut in Pulmonary Hypertension and Dr. Rui Feng in Biostatistics. Dr. Kawut would be considered my content expert, as he is a master clinician-researcher in PAH, as well as the lead on this clinical trial. He helps to direct appropriate clinical questions being asked of this data. Dr Rui Feng has expertise in RNA sequencing methods as well as statistical methods informing their use. She has been helpful in helping me understand how to format and use appropriate packages for this data.
-
-
-```
-
-```{r}
-## https://github.com/ames78/BMIN503_Final_Project/blob/Introduction/final_project_Meservey.qmd
-```
+<https://github.com/ames78/BMIN503_Final_Project/blob/master/BMIN5030_Final_Project2.qmd>
 
 ## Introduction {#sec-introduction}
 
-Describe the problem addressed, its significance, and some background to motivate the problem. This should extend what is in the @sec-overview.
+Pulmonary arterial hypertension (PAH) is a disease of pathologically elevated pressures in the pulmonary arterial bed, leading to right heart failure and \~20% mortality at 3 years. Despite availability of several pharmacologic classes of medications for PAH, treatment algorithms remain largely etiology-agnostic and anchored on disease severity as opposed to disease entity. Tools to help discriminate disease etiology and predict treatment response are needed in order to better tailor treatment algorithms and to improve patient outcomes. We anticipate that the investigation of blood-based biomarkers represents an important means to achieving this goal. Our initial step toward exploring candidate biomarkers in PAH will be a retrospective examination of the baseline and change in expression of a subset of candidate protein biomarkers in an available small clinical trial of patients with PAH. Our findings will help direct future larger and more costly studies to test and if appropriate validate potential candidate protein biomarkers.
 
-Explain why your problem is interdisciplinary, what fields can contribute to its understanding, and incorporate background related to what you learned from meeting with faculty/staff.
+Following diagnosis of PAH by right heart catheterization (RHC), it is commonly classified by specific etiology, predominately idiopathic PAH (IPAH, \~40% of cases), followed by connective tissue disease-associated PAH (CTD-PAH, \~20% of cases) and PAH associated with several less common systemic diseases. Although all forms of PAH result from aberrant vascular remodeling and vasoconstriction in the pulmonary arteries, the underlying mechanisms are incompletely understood and likely mediated by each specific disease etiology. With a 4:1 predominance in female patients and increasing evidence for a role of adipose tissue in PAH, hormonal and metabolic pathways are also thought to play significant roles in PAH pathophysiology. This complex and heterogenous mechanistic milieu alongside significant mortality, reliance on invasive means of monitoring disease and an untailored treatment armamentarium makes PAH a disease for which investigation of non-invasive biomarkers is both justifiable and urgent.
 
-```{r}
-## Pulmonary arterial hypertension (PAH) is a disease of pathologically elevated pressures in the pulmonary arterial bed, leading to right heart failure and ~20% mortality at 3 years. Despite availability of several pharmacologic classes of medications for PAH, treatment algorithms remain largely etiology-agnostic and anchored on disease severity as opposed to disease entity. Tools to help discriminate disease etiology and predict treatment response are needed in order to better tailor treatment algorithms and to improve patient outcomes. We anticipate that the investigation of blood-based biomarkers represents an important means to achieving this goal. Our initial step toward exploring candidate biomarkers in PAH will be a retrospective examination of the baseline and change in expression of a subset of candidate protein biomarkers in an available small clinical trial of patients with PAH.  Our findings will help direct future larger and more costly studies to test and if appropriate validate potential candidate protein biomarkers.
+Thus, I will assess RNA sequencing patterns by several demographic variables of interest including: RNA expression by active treatment arm (as data derived from clinical trial of medication X), sex, age and BMI, all of which could concievably alter RNA expression. Future aims will be to identify patterns of RNA expression by specific PAH etiology, by severity metrics including TAPSE and 6MWD and response to specific treatments.
 
-## Following diagnosis of PAH by right heart catheterization (RHC), it is commonly classified by specific etiology, predominately idiopathic PAH (IPAH, ~40% of cases), followed by connective tissue disease-associated PAH (CTD-PAH, ~20% of cases) and PAH associated with several less common systemic diseases. Although all forms of PAH result from aberrant vascular remodeling and vasoconstriction in the pulmonary arteries, the underlying mechanisms are incompletely understood and likely mediated by each specific disease etiology. With a 4:1 predominance in female patients and increasing evidence for a role of adipose tissue in PAH, hormonal and metabolic pathways are also thought to play significant roles in PAH pathophysiology. This complex and heterogenous mechanistic milieu alongside significant mortality, reliance on invasive means of monitoring disease and an untailored treatment armamentarium makes PAH a disease for which investigation of non-invasive biomarkers is both justifiable and urgent. 
-
-## Thus, I will assess RNA sequencing patterns by several demographic variables of interest including: RNA expression by active treatment arm (as data derived from clinical trial of medication X), sex, age and BMI, all of which could concievably alter RNA expression. Future aims will be to identify patterns of RNA expression by specific PAH etiology, by severity metrics including TAPSE and 6MWD and response to specific treatments.
-
-
-## Aim 1: Differential expression analysis by treatment arm (binary, active drug X vs placebo).
-## Aim 2: Differential expression analysis by sex (binary, self-reported male vs female).
-## Aim 3: Differential expression analysis by age (continuous, in years).
-## Aim 4: Differential expression analysis by BMI (continuous, in kg/m2).
-## Aim 5: Complete PCA, UMAP, pathway analysis, enrichment analysis for whichever aim returns most DEGs.
-```
+Aim 1: Differential expression analysis by treatment arm (binary, active drug X vs placebo). Aim 2: Differential expression analysis by sex (binary, self-reported male vs female). Aim 3: Differential expression analysis by age (continuous, in years). Aim 4: Differential expression analysis by BMI (continuous, in kg/m2). Aim 5: Complete PCA, UMAP, pathway analysis, enrichment analysis for whichever aim returns most DEGs.
 
 ## Methods {#sec-methods}
 
-Describe the data used and general methodological approach used to address the problem described in the @sec-introduction. Subsequently, incorporate full R code necessary to retrieve and clean data, and perform analysis. Be sure to include a description of code so that others (including your future self) can understand what you are doing and why.
+Overall Approach: Here I will use a linear model to assess whether there is a correlation between RNA expression and treatment arm, adjusting for sex and visit number in the model. I will be adjusting for both of these in all analyses because the clinical trial used a sex stratification sampling method and because there are two different visit numbers. There are other ways having two visit dates for each subject could be evaluated, namely through linear mixed effects modeling. Alternatively, I could look at the outcome and adjust for corresponding baseline expression level via looping each gene. I ultimately did not use these methods for this project as each analysis was taking several hours to run making it computationally difficult. All models will be subjected to Benjamini-Hochberg adjusted p values to account for multiple comparisons. Lastly, I will also intentionally mask specific gene transcript labels for anonymity.
 
-```{r}
-### Need to work on me (and also README.)
-### Should we do lmer instead?
-## Aim 1: Differential expression analysis by treatment arm (binary, active drug X vs placebo). Will use a linear model to assess whether there is a correlation between RNA expression and treatment arm, adjusting for sex and visit number in the model. I will be adjusting for both of these in all analyses because the clinical trial used a sex stratification sampling method and because there are two different visit numbers. 
+Aim 1: Differential expression analysis by treatment arm (linear model, binary outcome: active drug X vs placebo).
 
-## Aim 2: Differential expression analysis by sex (binary, self-reported male vs female).
-## Aim 3: Differential expression analysis by age (continuous, in years).
-## Aim 4: Differential expression analysis by BMI (continuous, in kg/m2).
-## Aim 5: Complete PCA, UMAP, pathway analysis, enrichment analysis for whichever aim returns most DEGs.
-```
+Aim 2: Differential expression analysis by sex (linear model, binary outcome: self-reported male vs female).
 
-## Load Pacakges
+Aim 3: Differential expression analysis by age (linear model, continuous outcome: in years).
+
+Aim 4: Differential expression analysis by BMI (linear model, continuous outcome: in kg/m2).
+
+Aim 5: Complete PCA, UMAP, t-SNE for dimensionality reduction and visualization for whichever analysis above returns most DEGs. Color code by variables of interest. Provide Scree plot for variance and loadings for PCs where relevant.
+
+Aim 6: Complete hierarchical clustering analysis using heatmap for visualization purposes on whichever analysis yields most DEGs.
+
+Aim 7: Complete pathway analysis using GO and Reactome databases for whichever aim returns most DEGs. Will allow for looser p values if needed to model pathways.
+
+Aim 8: Complete enrichment analysis using Gene Set Enrichment Analysis on whichever analysis yields the most DEGs.
+
+## Load Packages
 
 ```{r, echo = FALSE}
 ## loading necessary packages:
@@ -77,7 +61,16 @@ library(ggrepel)
 library(reshape2)
 library(lme4)
 library(lmerTest)
-
+library(umap)
+library(Rtsne)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(enrichplot)
+library(ReactomePA)
+library(pheatmap)
+library(fgsea)
+library(viridis)
+library(msigdbr)
 ```
 
 ## Load Files
@@ -197,7 +190,6 @@ merged <- merge(clininfo, TPMcounts_t_log2, by = "kit_number")
 # Recode arm from A/B to 1/2:
 merged$arm <- ifelse(merged$arm == "A", 1, 
                            ifelse(merged$arm == "B", 2, merged$arm))
-write.csv(merged, "merged.csv")
 
 ```
 
@@ -206,16 +198,17 @@ write.csv(merged, "merged.csv")
 ```{r}
 
 ## Format logTPMcounts to expression matrix (gene name as row names)
-TPMcounts$Gene.name <- NULL
-rownames(TPMcounts) <- TPMcounts$ID
-TPMcounts$ID <- NULL
-TPMcounts_log <- log2(TPMcounts + 1)
-colnames(TPMcounts_log) <- gsub("^X", "", colnames(TPMcounts_log))
-logexpressionmatrix <- TPMcounts_log
+TPMcounts_t_log2_t <- t(TPMcounts_t_log2)
+logexpressionmatrix <- TPMcounts_t_log2_t
+logexpressionmatrix <- as.matrix(logexpressionmatrix)
 
 ```
 
-## Analysis 1: DEG for Treatment Arm Adjusted by Sex and Visit
+## Results {#sec-results}
+
+## Analysis 1: DEG for Treatment Arm Adjusted by Sex and Visit 
+
+There were no significantly differentially expressed RNA transcripts by treatment arm after adjusting for sex and visit.
 
 ```{r, echo= FALSE}
 ## Does expression of any RNA transcripts differ by treatment arm 1 vs. 2?
@@ -227,7 +220,12 @@ analysis1 <- model.matrix (~ treatment + gender + visit)
 colnames(analysis1) <- c("Intercept", "Treatment2vs1", "Gender2vs1", "Visit3vs1")
 
 ## Fit Linear Model
+logexpressionmatrix <- as.matrix(logexpressionmatrix)
 fit_f <- lmFit(logexpressionmatrix, analysis1)
+
+dim(logexpressionmatrix)  # Genes x Samples
+dim(analysis1)            # Samples x Covariates
+
 
 ## Apply Empirical Bayes Moderation: Stabilizes variance 
 fit_f <- eBayes(fit_f)
@@ -253,31 +251,9 @@ ggplot(results_f, aes(x = logFC, y = -log10(P.Value), color = Significant)) +
 
 ```
 
-## Analysis 2: DEG for
-
-## Results {#sec-results}
-
-Describe your results and include relevant tables, plots, and code/comments used to obtain them. You may refer to the @sec-methods as needed. End with a brief conclusion of your findings related to the question you set out to address. You can include references if you'd like, but this is not required.
-
-## Analysis 1: RNA by Treatment Arm
-
-```{r}
-## Analysis 1: No Significantly Differentially Expressed RNA Transcripts by Treatment Arm, Adjusting for Gender and Visit. 
-
-## Volcano Plot for Treatment Arm:  
-ggplot(results_f, aes(x = logFC, y = -log10(adj.P.Val), color = Significant)) +
-  geom_point(alpha = 0.8, size = 2) +
-  scale_color_manual(values = c("gray", "cornflowerblue")) +  # Gray for not significant, red for significant
-  labs(
-    title = "Differential Expression by Treatment Arm",
-    x = "Log2 Fold Change",
-    y = "-Log10 BH Adjusted P-value"
-  ) +
-  theme_minimal() +
-  theme(legend.title = element_blank())
-```
-
 ## Analysis 2: Differential Expression by Sex Adjusted by Visit
+
+There were several differentially expressed RNA transcripts by sex after adjusting for visit number.
 
 ```{r}
 ## Does expression of any RNA transcripts differ by sex (binary, self-reported male vs. female)?
@@ -332,6 +308,8 @@ ggplot(results_g2, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
 
 ## Aim 3: Differential Expression by Age Adjusted by Sex and Visit
 
+There were 379 differentially expressed RNA transcripts by age after adjusting for sex and visit.
+
 ```{r}
 ## Does expression of any RNA transcripts differ by age (continuous, in years)?
 ## Define Variables of Interest, Analysis DF
@@ -383,6 +361,8 @@ ggplot(results_h3, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
 
 ## Analysis 4: Differential Expression by BMI Adjusted by Sex and Visit
 
+There were 8 differentially expressed RNA transcripts by BMI after adjusting for sex and visit.
+
 ```{r}
 ## Does expression of any RNA transcripts differ by BMI (continuous, in kg/m2)?
 ## Define Variables of Interest, Analysis DF
@@ -431,10 +411,529 @@ ggplot(results_i4, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
     legend.position = "right")
 ```
 
+## Principal Components Analysis for All Datapoints
+
+PCA, UMAP and t-SNE were all used on the significant age gene transcript sets in order to visualize trends. Color coding was used to visualize how variables of interest related to dimensionality vectors. Age demonstrated the most visually compelling trend, as would be expected on age dataset.
+
+```{r} *** START HERE 12/2/24}
+## PCA for Age: 
+## Extract significantly different age (3325 sig genes)
+sigagegenes <- results_h3[results_h3$Significant == "Significant", ]
+sigagegenenames <- rownames(sigagegenes)
+sigagematrix <- logexpressionmatrix[sigagegenenames, ]
+sigagematrix <- t(sigagematrix)
+
+## Center but dont scale for first iteration:
+PCAcolumns1<- sigagematrix
+PCAresults1 <- prcomp(PCAcolumns1, center = TRUE, scale = TRUE)
+PCAscores1 <- as.data.frame(PCAresults1$x)
+
+ggplot(PCAscores1, aes(x = PC1, y = PC2)) +
+  geom_point(color = "cornflowerblue", alpha = 0.7) +
+  labs(title = "PCA Scatterplot (PC1 vs PC2)", x = "PC1", y = "PC2") +
+  theme_minimal()
+
+variance1 <- summary(PCAresults1)$importance[2, ] * 100
+
+barplot(
+  variance1,
+  names.arg = paste0("PC", seq_along(variance1)),
+  main = "Scree Plot",
+  xlab = "Principal Components",
+  ylab = "Percentage of Variance Explained",
+  col = "cornflowerblue",
+  las = 2
+)
+
+loadings1 <- as.data.frame(PCAresults1$rotation)
+ggplot(loadings1, aes(x = rownames(loadings1), y = PC1)) +
+  geom_bar(stat = "identity", fill = "darkorange") +
+  labs(title = "Variable Loadings for PC1", x = "Variables1", y = "Loading1") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+loadings1 <- as.data.frame(PCAresults1$rotation)
+ggplot(loadings1, aes(x = rownames(loadings1), y = PC2)) +
+  geom_bar(stat = "identity", fill = "cyan4") +
+  labs(title = "Variable Loadings for PC2", x = "Variables1", y = "Loading1") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
+
+## Repeat Principal Component Analysis for Age, Followup Visit Only
+
 ```{r}
+# Remove "X" prefix from logexpressionmatrix column names for matching
+colnames(logexpressionmatrix) <- sub("^X", "", colnames(logexpressionmatrix))
+# Filter kit_numbers for visit_num = 1 and visit_num = 3
+kit_numbers_visit1 <- merged$kit_number[merged$visit_num == 1]
+kit_numbers_visit3 <- merged$kit_number[merged$visit_num == 3]
+logexpressionvisit1 <- logexpressionmatrix[, colnames(logexpressionmatrix) %in% kit_numbers_visit1]
+logexpressionvisit3 <- logexpressionmatrix[, colnames(logexpressionmatrix) %in% kit_numbers_visit3]
+
+
+## Does expression of any RNA transcripts differ by age (continuous, in years)?
+# Create design matrix using the subset of merged
+age <- merged_subset$age
+gender <- factor(merged_subset$gender)
+analysis5 <- model.matrix(~ age + gender)
+colnames(analysis5) <- c("Intercept", "Age", "Gender2vs1")
+
+fit_h5 <- lmFit(logexpressionvisit3, analysis5)
+
+## Apply Empirical Bayes Moderation: Stabilizes variance 
+fit_h5 <- eBayes(fit_h5)
+
+## Fit Results
+results_h5<- topTable(fit_h5, coef = "Age", adjust.method = "BH", number = Inf)
+
+## Filter Significance by Benjamini-Hochberg Correction for Multiple Comparisons
+results_h5$Significant <- ifelse(results_h5$adj.P.Val <= 0.05, "Significant", "Not Significant")
+
+## Color Coding:
+results_h5$colorcoding <- ifelse(
+  results_h5$Significant == "Significant" & results_h5$logFC > 0, "Pink (Overrepresented in Young)",
+  ifelse(results_h5$Significant == "Significant" & results_h5$logFC < 0, "Blue (Overrepresented in Old)", "Not Significant")
+)
+
+## Volcano Plot for Age:  
+ggplot(results_h5, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
+  geom_point(alpha = 0.8, size = 2) +
+  scale_color_manual(
+    values = c(
+      "Pink (Overrepresented in Young)" = "hotpink4",
+      "Blue (Overrepresented in Old)" = "cornflowerblue",
+      "Not Significant" = "gray"
+  ) 
+  ) +
+  labs(
+    title = "Differential Expression by Age",
+    x = "Log2 Fold Change", 
+    y = "-Log10 BH-Adjusted P-value"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.title = element_blank(), 
+    legend.position = "right")
+
+
+## PCA for Age: 
+## Extract significantly different age
+sigagegenes1 <- results_h5[results_h5$Significant == "Significant", ]
+sigagegenenames1 <- rownames(sigagegenes1)
+sigagematrix1 <- logexpressionvisit3[sigagegenenames1, ]
+PCAcolumns2 <- t(sigagematrix1)  # Transpose the matrix
+PCAresults2 <- prcomp(PCAcolumns2, center = TRUE, scale = TRUE)
+PCAscores2 <- as.data.frame(PCAresults2$x)
+
+ggplot(PCAscores2, aes(x = PC1, y = PC2)) +
+  geom_point(color = "cornflowerblue", alpha = 0.7) +
+  labs(title = "PCA Scatterplot (PC1 vs PC2)", x = "PC1", y = "PC2") +
+  theme_minimal()
+
+variance2 <- summary(PCAresults2)$importance[2, ] * 100
+
+barplot(
+  variance2,
+  names.arg = paste0("PC", seq_along(variance2)),
+  main = "Scree Plot",
+  xlab = "Principal Components",
+  ylab = "Percentage of Variance Explained",
+  col = "cornflowerblue",
+  las = 2
+)
+
+
+loadings2 <- as.data.frame(PCAresults2$rotation)
+ggplot(loadings2, aes(x = factor(rownames(loadings2)), y = PC1)) +
+  geom_bar(stat = "identity", fill = "darkorange") +
+  labs(title = "Variable Loadings for PC1", x = "Variables", y = "Loading") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggplot(loadings2, aes(x = factor(rownames(loadings2)), y = PC2)) +
+  geom_bar(stat = "identity", fill = "lightyellow") +
+  labs(title = "Variable Loadings for PC2", x = "Variables", y = "Loading") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+## Color the PCA by Age for easier visualization 
+# Extract the age variable for the same samples
+sampleage <- rownames(PCAcolumns2)  # Samples in PCA
+age_sub <- merged$age[match(sampleage, merged$kit_number)]  # Match age by sample names
+PCAscores2 <- as.data.frame(PCAresults2$x)
+PCAscores2$age <- age_sub
+ggplot(PCAscores2, aes(x = PC1, y = PC2, color = age)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_gradient(low = "blue", high = "red") +
+  labs(
+    title = "PCA Scatterplot (Colored by Age)",
+    x = "PC1",
+    y = "PC2",
+    color = "Age"
+  ) +
+  theme_minimal()
+
+# Create age groups
+PCAscores2$age_group <- ifelse(PCAscores2$age < 50, "Under 50", "Over 50")
+ggplot(PCAscores2, aes(x = PC1, y = PC2, color = age_group)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_manual(values = c("Under 50" = "blue", "Over 50" = "red")) +
+  labs(
+    title = "PCA Scatterplot (Under 50 vs. Over 50)",
+    x = "PC1",
+    y = "PC2",
+    color = "Age Group"
+  ) +
+  theme_minimal()
+```
+
+## UMAP for Age, Followup Visit Only
+
+```{r}
+
+umapvisit3<- umap(PCAcolumns2)
+umapvisit3results <- umap::umap(PCAcolumns2, n_neighbors = 15, min_dist = 0.1, metric = "euclidean")
+umapvisit3df <- as.data.frame(umapvisit3results$layout)
+colnames(umapvisit3df) <- c("UMAP1", "UMAP2")
+ggplot(umapvisit3df, aes(x = UMAP1, y = UMAP2, color = PCAscores2$age)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_gradient(low = "blue", high = "red") +
+  labs(
+    title = "UMAP Visualization (Colored by Age)",
+    x = "UMAP1",
+    y = "UMAP2",
+    color = "Age"
+  ) +
+  theme_minimal()
+
+
+
+
+
+```
+
+## UMAP on Entire Dataset
+
+```{r}
+## UMAP on full dataset, colored by various conditions
+joined <- merged[merged$kit_number %in% colnames(logexpressionmatrix), ]
+joined <- joined[match(colnames(logexpressionmatrix), joined$kit_number), ]
+log_t <- t(logexpressionmatrix)
+umapall<- umap(log_t, n_neighbors = 15, min_dist = 0.1, metric = "euclidean")
+
+umap_df <- as.data.frame(umapall$layout)
+colnames(umap_df) <- c("UMAP1", "UMAP2")
+umap_df$kit_number <- joined$kit_number  
+umap_df <- cbind(umap_df, joined)
+umap_df <- umap_df[, !duplicated(colnames(umap_df))]
+
+
+
+## Age
+ggplot(umap_df, aes(x = UMAP1, y = UMAP2, color = age_der)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "UMAP- Entire Dataset",
+    x = "UMAP1",
+    y = "UMAP2",
+    color = "Age"
+  ) +
+  theme_minimal()
+
+
+## Arm 
+ggplot(umap_df, aes(x = UMAP1, y = UMAP2, color = arm)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_manual(
+    values = c("1" = "cornflowerblue", "2" = "darkorange")
+  ) +
+  labs(
+    title = "UMAP- Entire Dataset",
+    x = "UMAP1",
+    y = "UMAP2",
+    color = "Treatment Arm"
+  ) +
+  theme_minimal()
+
+
+## Visit Number
+ggplot(umap_df, aes(x = UMAP1, y = UMAP2, color = visit_num)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "UMAP- Entire Dataset",
+    x = "UMAP1",
+    y = "UMAP2",
+    color = "Visit Number"
+  ) +
+  theme_minimal()
+
+
+## Gender 
+ggplot(umap_df, aes(x = UMAP1, y = UMAP2, color = gender)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "UMAP- Entire Dataset",
+    x = "UMAP1",
+    y = "UMAP2",
+    color = "gender"
+  ) +
+  theme_minimal()
+
+
+## BMI 
+ggplot(umap_df, aes(x = UMAP1, y = UMAP2, color = BMI)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "UMAP- Entire Dataset",
+    x = "UMAP1",
+    y = "UMAP2",
+    color = "BMI"
+  ) +
+  theme_minimal()
+```
+
+## t-SNE on Entire Dataset
+
+```{r}
+
+set.seed(1)
+tsne <- Rtsne(log_t, dims = 2, perplexity = 30, verbose = TRUE, max_iter = 500)
+tsne_df <- as.data.frame(tsne$Y)
+colnames(tsne_df) <- c("tSNE1", "tSNE2")
+tsne_df <- cbind(tsne_df, umap_df[, c("arm", "age_der", "visit_num", "gender", "BMI")])
+ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = arm)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_manual(values = c("1" = "cornflowerblue", "2" = "darkorange")) +
+  labs(
+    title = "t-SNE- Entire Dataset",
+    x = "t-SNE1",
+    y = "t-SNE2",
+    color = "Arm"
+  ) +
+  theme_minimal()
+
+ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = age_der)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "t-SNE - Entire Dataset",
+    x = "t-SNE1",
+    y = "t-SNE2",
+    color = "Age"
+  ) +
+  theme_minimal()
+
+ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = BMI)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "t-SNE - Entire Dataset",
+    x = "t-SNE1",
+    y = "t-SNE2",
+    color = "BMI"
+  ) +
+  theme_minimal()
+
+
+
+```
+
+## Pathway Analysis for Followup Visit Age
+
+Several immunologically related pathways were differentially expressed by age in participants with PAH.
+
+```{r, warn = FALSE}
+sigagegenes1 <- results_h5[results_h5$Significant == "Significant", ]
+sigagegenenames1 <- rownames(sigagegenes1)
+sigagegenes1$Gene <- rownames(sigagegenes1)
+entrez <- bitr(
+  sigagegenes1$Gene,
+  fromType = "ENSEMBL",
+  toType = "ENTREZID",
+  OrgDb = org.Hs.eg.db
+)
+
+sigagegenes1 <- merge(sigagegenes1, entrez, by.x = "Gene", by.y = "ENSEMBL", all.x = TRUE)
+
+## create new df without NA
+sigagegenes2 <- sigagegenes1[!is.na(sigagegenes1$ENTREZID), ]
+gopathanalysis <- enrichGO(
+  gene = sigagegenes2$ENTREZID, 
+  OrgDb = org.Hs.eg.db, 
+  keyType = "ENTREZID",
+  ont = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.05
+)
+
+dotplot(gopathanalysis, 
+        showCategory = 8,            
+        title = "GO Pathway Analysis for Age") +
+  theme_minimal() + 
+  theme(
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 6),
+    axis.text = element_text(size = 6)
+  )
+
+
+```
+
+## BMI Pathway Analysis
+
+Briefly looking at BMI, three pathways were significantly differentially expressed, including neuromuscular and GPCR signaling.
+
+```{r, warn = FALSE}
+sigbmigenes <- results_i4[results_i4$Significant == "Significant", ]
+sigbmigenenames1 <- rownames(sigbmigenes)
+sigbmigenes$Gene <- rownames(sigbmigenes)
+entrez <- bitr(
+  sigbmigenes$Gene,
+  fromType = "ENSEMBL",
+  toType = "ENTREZID",
+  OrgDb = org.Hs.eg.db
+)
+
+sigbmigenes <- merge(sigbmigenes, entrez, by.x = "Gene", by.y = "ENSEMBL", all.x = TRUE)
+
+## 25% missing, create new df without NA
+sigbmigenes2 <- sigbmigenes[!is.na(sigbmigenes$ENTREZID), ]
+gopathanalysisbmi <- enrichGO(
+  gene = sigbmigenes2$ENTREZID, 
+  OrgDb = org.Hs.eg.db, 
+  keyType = "ENTREZID",
+  ont = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.05
+)
+
+dotplot(gopathanalysisbmi, 
+        showCategory = 8,            
+        title = "GO Pathway Analysis for BMI") +
+  theme_minimal() + 
+  theme(
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 6),
+    axis.text = element_text(size = 6)
+  )
+
+```
+
+## Followup Age in Reactome
+
+No significant pathways were demonstrated in the reactome database.
+
+```{r, warn = FALSE}
+sigagegenes1 <- results_h5[results_h5$Significant == "Significant", ]
+sigagegenenames1 <- rownames(sigagegenes1)
+sigagegenes1$Gene <- rownames(sigagegenes1)
+entrez <- bitr(
+  sigagegenes1$Gene,
+  fromType = "ENSEMBL",
+  toType = "ENTREZID",
+  OrgDb = org.Hs.eg.db
+)
+
+sigagegenes1 <- merge(sigagegenes1, entrez, by.x = "Gene", by.y = "ENSEMBL", all.x = TRUE)
+
+## create new df without NA
+sigagegenes2 <- sigagegenes1[!is.na(sigagegenes1$ENTREZID), ]
+repathanalysis <- enrichPathway(
+  gene = sigagegenes2$ENTREZID, 
+  organism = "human",
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.05
+)
+
+if (is.null(repathanalysis) || nrow(repathanalysis) == 0) {
+  print("No significantly enriched pathways.")} else {print("Yes")}
+
+
+```
+
+## Heatmap for Age
+
+Demonstrates hierarchical clustering for those transcripts differentially expressed by age in participants with PAH. Number of transcripts shown both overall at 379 as well as the top 10 significant age related genes for ease of visualization. Gene labels removed for anonymity.
+
+```{r}
+## Extract Genes from Prior Analysis
+valid_genes <- sigagegenenames1[sigagegenenames1 %in% rownames(logexpressionmatrix)]
+valid_genes <- valid_genes[valid_genes %in% rownames(logexpressionmatrix)]
+expressheat <- logexpressionmatrix[valid_genes, ]
+expressheat <- as.matrix(expressheat)
+
+## All 379 Significant Age Genes
+pheatmap(
+  expressheat,                 
+  cluster_rows = TRUE,         
+  cluster_cols = TRUE,         
+  scale = "row",        
+  show_rownames = FALSE,
+  show_colnames = FALSE,
+  main = "Heatmap of 379 Significant Age Related Genes"
+)
+
+
+# Top 10 Genes only 
+valid10 <- valid_genes[1:10]
+expressheat10 <- logexpressionmatrix[valid10, ]
+expressheat10 <- as.matrix(expressheat10)  
+pheatmap(
+  expressheat10,           
+  cluster_rows = TRUE,         
+  cluster_cols = TRUE,        
+  scale = "row",         
+  show_rownames = FALSE,
+  show_colnames = FALSE,
+  main = "Heatmap of Top 10 Significant Age Related Genes"
+)
+
+```
+
+## Functional Gene Enrichment Analysis for Age
+
+There is significant enrichment for the pathway "Xenobiotic Metabolism" in the significantly differentially expressed RNA transcripts by age.
+
+```{r, warn = FALSE}
+## obtain list of significant age related genes from prior analysis, make sure gene label is present and sort
+one <- results_h5[results_h5$Significant == "Significant", ]
+one$Gene <- rownames(one)
+rankage <- one$logFC
+names(rankage) <- one$Gene
+rankage <- sort(rankage, decreasing = TRUE)
+
+## update such that all symbols match ensembl
+convert<- bitr(
+  names(rankage),      
+  fromType = "ENSEMBL", 
+  toType = "SYMBOL",    
+  OrgDb = org.Hs.eg.db
+)
+
+rankage <- rankage[names(rankage) %in% convert$ENSEMBL] 
+names(rankage) <- convert$SYMBOL[match(names(rankage), convert$ENSEMBL)]
+
+## pathways 
+pathways <- msigdbr(species = "Homo sapiens", category = "H")
+pathway2 <- split(pathways$gene_symbol, pathways$gs_name)
+fgseaage <- fgseaMultilevel(
+  pathways = pathway2,
+  stats = rankage,
+  minSize = 1,
+  maxSize = 5000
+)
+
+fgseaage_sig <- fgseaage[fgseaage$padj < 0.5, ]
+
+
+toppathway <- fgseaage_sig[1, "pathway"]
+toppathway <- as.character(fgseaage_sig[1, "pathway"])
+plotEnrichment(pathway2[[toppathway]], rankage) +
+  labs(title = paste("Enrichment for", toppathway))
 
 ```
 
 ## Conclusion
 
-This the conclusion. The @sec-results can be invoked here.
+After log-transforming TPM RNA sequencing transcripts and adjusting for sex and visit number, age generated the highest number of differentially expressed genes within a population of clinical trial participants with pulmonary arterial hypertension (PAH). Treatment arm did not demonstrate significantly deferentially expressed genes. Sex (adjusted only for visit number) and BMI demonstrated comparatively fewer deferentially expressed RNA transcripts. Those RNA transcripts that were significantly up or downregulated in the age differential expression analysis using a Benjamini Hochberg approach to account for multiple comparisons were then analyzed and/or subjected to several commonly employed visualization methods in RNA seq projects. I first completed a principal components analysis on both the entire dataset and just the followup set. The loadings for these would allow one to identify specific transcripts of interest. I then generated PCAs, UMAPs and t-SNEs for dimensionality reduction and color coded by variables of interest to visualize how these may or may not relate to the vectors yielded by various techniques. A pathway analysis revealed that age related transcripts were most heavily related to immunologic biologic pathways. A heatmap helped to visualize hierarchical clustering within age pathways for participants with PAH. Lastly, a gene enrichment analysis showed enrichment of age-related RNA sequencing transcripts within the "Xenobiotic Metabolism" pathway.
