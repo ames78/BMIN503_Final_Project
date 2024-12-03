@@ -219,12 +219,11 @@ visit <- factor(merged$visit_num)
 analysis1 <- model.matrix (~ treatment + gender + visit)
 colnames(analysis1) <- c("Intercept", "Treatment2vs1", "Gender2vs1", "Visit3vs1")
 
-## Fit Linear Model
+## Fit Linear Model, make sure only numeric numbers with matrix format
 logexpressionmatrix <- as.matrix(logexpressionmatrix)
+logexpressionmatrix <- logexpressionmatrix[-1, ]
+logexpressionmatrix <- apply(logexpressionmatrix, 2, as.numeric)
 fit_f <- lmFit(logexpressionmatrix, analysis1)
-
-dim(logexpressionmatrix)  # Genes x Samples
-dim(analysis1)            # Samples x Covariates
 
 
 ## Apply Empirical Bayes Moderation: Stabilizes variance 
@@ -311,6 +310,7 @@ ggplot(results_g2, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
 There were 379 differentially expressed RNA transcripts by age after adjusting for sex and visit.
 
 ```{r}
+
 ## Does expression of any RNA transcripts differ by age (continuous, in years)?
 ## Define Variables of Interest, Analysis DF
 age <- merged$age
@@ -415,7 +415,7 @@ ggplot(results_i4, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
 
 PCA, UMAP and t-SNE were all used on the significant age gene transcript sets in order to visualize trends. Color coding was used to visualize how variables of interest related to dimensionality vectors. Age demonstrated the most visually compelling trend, as would be expected on age dataset.
 
-```{r} *** START HERE 12/2/24}
+```{r}## Start here}
 ## PCA for Age: 
 ## Extract significantly different age (3325 sig genes)
 sigagegenes <- results_h3[results_h3$Significant == "Significant", ]
@@ -423,7 +423,7 @@ sigagegenenames <- rownames(sigagegenes)
 sigagematrix <- logexpressionmatrix[sigagegenenames, ]
 sigagematrix <- t(sigagematrix)
 
-## Center but dont scale for first iteration:
+## Center and scale:
 PCAcolumns1<- sigagematrix
 PCAresults1 <- prcomp(PCAcolumns1, center = TRUE, scale = TRUE)
 PCAscores1 <- as.data.frame(PCAresults1$x)

@@ -6,7 +6,23 @@ editor: visual
 
 ## README
 
-Necessary packages include:
+## Project Overview:
+
+Pulmonary arterial hypertension (PAH) is a disease of pathologically elevated pressures in the pulmonary arterial bed, leading to right heart failure and \~20% mortality at 3 years. Tools to help discriminate disease etiology and predict treatment response are needed in order to better tailor treatment algorithms and to improve patient outcomes. We anticipate that the investigation of blood-based biomarkers represents an important means to achieving this goal. Our initial step toward exploring candidate biomarkers in PAH will be a retrospective examination of the baseline and change in expression of a subset of candidate protein biomarkers in an available small clinical trial of patients with PAH. This project assesses RNA sequencing patterns by several demographic variables of interest including: RNA expression by active treatment arm (as data derived from clinical trial of medication X), sex, age and BMI, all of which could concievably alter RNA expression. Future aims will be to identify patterns of RNA expression by specific PAH etiology, by severity metrics including TAPSE and 6MWD and response to specific treatments.
+
+## Aims and Methods Overview:
+
+Aim 1: Differential expression analysis by treatment arm (binary, active drug X vs placebo). Aim 2: Differential expression analysis by sex (binary, self-reported male vs female).
+
+Aim 3: Differential expression analysis by age (continuous, in years).
+
+Aim 4: Differential expression analysis by BMI (continuous, in kg/m2).
+
+Aim 5-8: Complete PCA, UMAP, t-SNE, heat-map, pathway analysis, enrichment analysis for whichever aim returns most DEGs.
+
+Models are linear and adjusted for sex and visit number, significance assessed using Benjamini Hochberg adjusted p value \<0.05.
+
+## Necessary packages include:
 
 ```{r}
 library(dplyr)
@@ -17,38 +33,48 @@ library(tidyverse)
 library(ggrepel)
 library(reshape2)
 library(lme4)
+library(lmerTest)
+library(umap)
+library(Rtsne)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(enrichplot)
+library(ReactomePA)
+library(pheatmap)
+library(fgsea)
+library(viridis)
+library(msigdbr)
 ```
 
-Original Files:
+## Original Files:
 
-```{r}
-There are 3 original files: 
+There are 3 original files:
 
-RNAdemo = Demographics only 
-RNAids = ID numbers only 
-TPMcounts = TPM normalized RNA sequencing counts 
-```
+RNAdemo = Demographics only RNAids = ID numbers only TPMcounts = TPM normalized RNA sequencing counts
 
-Transformed Dataframes:
+## Transformed Dataframes:
 
-```{r}
 These are modified (transposed, labels exchanged and log transformed) to become the following key dataframes:
 
 TPMcounts_t = transposed TPM dataframe
-TPMcounts_t_log2 = transposed and log2-transformed TPM dataframe
-TPMcounts = original TPM count dataframe
+
+TPMcounts_t_log2 = transposed and log2-transformed
+
+TPM dataframe TPMcounts = original TPM count dataframe
+
 TPMcounts_log2 = log2-transformed TPM DataFrame
+
 logexpressionmatrix = TPMcounts_log2 without any non-numerical info
-merged = clinical info and transposed log2-transformed TPM RNA data 
 
-RNAdemodup = RNAdemo sheet duplicated by pt in order to add # kit_number for merge
+merged = clinical info and transposed log2-transformed TPM RNA data
 
-clininfo = RNAdemodup + RNAids (merging on kit_number), also subsetted for only variables of interest 
+RNAdemodup = RNAdemo sheet duplicated by pt in order to add \# kit_number for merge
 
-kit_numbers_to_remove = Remove kits that didn't meet QC 
-```
+clininfo = RNAdemodup + RNAids (merging on kit_number), also subsetted for only variables of interest
 
-Key Analysis Workflows (Duplicated x 4 for different analyses):
+kit_numbers_to_remove = Remove kits that didn't meet QC
+
+## Key Analysis Workflows for Differential Expression Analyses (Duplicated x 4 for different analyses):
 
 ```{r}
 ## The following is repeated x 4 - changing analysis (1,2,3,4), fit (f,g2, h3, i4), results (f, g2, h3, i4) suffices accordingly. Adjusted BH p values <0.05 used to account for multiple comparisons. 
@@ -74,6 +100,8 @@ ggplot(results_f, aes(x = logFC, y = -log10(P.Value), color = Significant))
 
 ```
 
+## Variable Definitions
+
 ```{r}
 Variable Definitions: 
 Treatment: Placebo = 1, Active = 2
@@ -82,7 +110,156 @@ Age: Continuous, years
 BMI: Continuous, kg/m2
 ```
 
+## Dimensionality Reduction/Visualization: PCA, UMAP and t-SNE
+
 ```{r}
-Models: 
-  Linear *** 
+## PCA Workflow:
+## Extract significantly different transcripts following analysis of interest
+## Center and scale:
+PCAcolumns1<- sigagematrix
+PCAresults1 <- prcomp(PCAcolumns1, center = TRUE, scale = TRUE)
+PCAscores1 <- as.data.frame(PCAresults1$x)
+
+## PC1 vs. PC2 Plot
+ggplot(PCAscores1, aes(x = PC1, y = PC2)) +
+  geom_point(color = "cornflowerblue", alpha = 0.7) +
+  labs(title = "PCA Scatterplot (PC1 vs PC2)", x = "PC1", y = "PC2") +
+  theme_minimal()
+
+## Scree plot 
+## Loadings
+
+## UMAP Workflow:
+## UMAP on full dataset, colored by various conditions
+umapall<- umap(log_t, n_neighbors = 15, min_dist = 0.1, metric = "euclidean")
+umap_df <- as.data.frame(umapall$layout)
+colnames(umap_df) <- c("UMAP1", "UMAP2")
+
+## Plot and color by feature of interest
+ggplot(umap_df, aes(x = UMAP1, y = UMAP2, color = age_der)) +
+  geom_point(size = 3, alpha = 0.7) +
+  labs(
+    title = "UMAP- Entire Dataset",
+    x = "UMAP1",
+    y = "UMAP2",
+    color = "Age"
+  ) +
+  theme_minimal()
+
+## t-SNE Workflow:
+set.seed(1)
+tsne <- Rtsne(log_t, dims = 2, perplexity = 30, verbose = TRUE, max_iter = 500)
+tsne_df <- as.data.frame(tsne$Y)
+colnames(tsne_df) <- c("tSNE1", "tSNE2")
+tsne_df <- cbind(tsne_df, umap_df[, c("arm", "age_der", "visit_num", "gender", "BMI")])
+
+## Plot and color by feature of interest:
+ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = arm)) +
+  geom_point(size = 3, alpha = 0.7) +
+  scale_color_manual(values = c("1" = "cornflowerblue", "2" = "darkorange")) +
+  labs(
+    title = "t-SNE- Entire Dataset",
+    x = "t-SNE1",
+    y = "t-SNE2",
+    color = "Arm"
+  ) +
+  theme_minimal()
+
+```
+
+## Pathway Analysis 
+
+```{r}
+## translate and merge gene references:
+entrez <- bitr(
+  sigagegenes1$Gene,
+  fromType = "ENSEMBL",
+  toType = "ENTREZID",
+  OrgDb = org.Hs.eg.db
+)
+
+sigagegenes1 <- merge(sigagegenes1, entrez, by.x = "Gene", by.y = "ENSEMBL", all.x = TRUE)
+
+## create new df without NA
+sigagegenes2 <- sigagegenes1[!is.na(sigagegenes1$ENTREZID), ]
+
+## codify genes via GO ontology:
+gopathanalysis <- enrichGO(
+  gene = sigagegenes2$ENTREZID, 
+  OrgDb = org.Hs.eg.db, 
+  keyType = "ENTREZID",
+  ont = "BP",
+  pAdjustMethod = "BH",
+  pvalueCutoff = 0.05
+)
+
+## dot plot:
+dotplot(gopathanalysis, 
+        showCategory = 8,            
+        title = "GO Pathway Analysis for Age") +
+  theme_minimal() + 
+  theme(
+    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 6),
+    axis.text = element_text(size = 6)
+  )
+```
+
+## Heatmap
+
+```{r}
+# Extract Genes from Prior Analysis
+# All genes
+pheatmap(
+  expressheat,                 
+  cluster_rows = TRUE,         
+  cluster_cols = TRUE,         
+  scale = "row",        
+  show_rownames = FALSE,
+  show_colnames = FALSE,
+  main = "Heatmap of 379 Significant Age Related Genes"
+)
+
+# Adjust as interested
+# Top 10 Genes only 
+valid10 <- valid_genes[1:10]
+expressheat10 <- logexpressionmatrix[valid10, ]
+expressheat10 <- as.matrix(expressheat10)  
+pheatmap(
+  expressheat10,           
+  cluster_rows = TRUE,         
+  cluster_cols = TRUE,        
+  scale = "row",         
+  show_rownames = FALSE,
+  show_colnames = FALSE,
+  main = "Heatmap of Top 10 Significant Age Related Genes"
+)
+```
+
+## Enrichment Analysis
+
+```{r}
+## obtain list of significant age related genes from prior analysis, make sure gene label is present and sort
+## update such that all symbols match ensembl
+convert<- bitr(
+  names(rankage),      
+  fromType = "ENSEMBL", 
+  toType = "SYMBOL",    
+  OrgDb = org.Hs.eg.db
+)
+
+## merge with pathways 
+## loosen parameters
+pathways <- msigdbr(species = "Homo sapiens", category = "H")
+pathway2 <- split(pathways$gene_symbol, pathways$gs_name)
+fgseaage <- fgseaMultilevel(
+  pathways = pathway2,
+  stats = rankage,
+  minSize = 1,
+  maxSize = 5000
+)
+
+## plot enrichment of top pathway
+plotEnrichment(pathway2[[toppathway]], rankage) +
+  labs(title = paste("Enrichment for", toppathway))
 ```
