@@ -26,8 +26,6 @@ Following diagnosis of PAH by right heart catheterization (RHC), it is commonly 
 
 Thus, I will assess RNA sequencing patterns by several demographic variables of interest including: RNA expression by active treatment arm (as data derived from clinical trial of medication X), sex, age and BMI, all of which could concievably alter RNA expression. Future aims will be to identify patterns of RNA expression by specific PAH etiology, by severity metrics including TAPSE and 6MWD and response to specific treatments.
 
-Aim 1: Differential expression analysis by treatment arm (binary, active drug X vs placebo). Aim 2: Differential expression analysis by sex (binary, self-reported male vs female). Aim 3: Differential expression analysis by age (continuous, in years). Aim 4: Differential expression analysis by BMI (continuous, in kg/m2). Aim 5: Complete PCA, UMAP, pathway analysis, enrichment analysis for whichever aim returns most DEGs.
-
 ## Methods {#sec-methods}
 
 Overall Approach: Here I will use a linear model to assess whether there is a correlation between RNA expression and treatment arm, adjusting for sex and visit number in the model. I will be adjusting for both of these in all analyses because the clinical trial used a sex stratification sampling method and because there are two different visit numbers. There are other ways having two visit dates for each subject could be evaluated, namely through linear mixed effects modeling. Alternatively, I could look at the outcome and adjust for corresponding baseline expression level via looping each gene. I ultimately did not use these methods for this project as each analysis was taking several hours to run making it computationally difficult. All models will be subjected to Benjamini-Hochberg adjusted p values to account for multiple comparisons. Lastly, I will also intentionally mask specific gene transcript labels for anonymity.
@@ -310,6 +308,12 @@ ggplot(results_g2, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
 There were 379 differentially expressed RNA transcripts by age after adjusting for sex and visit.
 
 ```{r}
+## make sure gene names are carried forward 
+genenames <- colnames(merged)[8:57507]
+rownames(logexpressionmatrix) <- genenames
+
+
+
 
 ## Does expression of any RNA transcripts differ by age (continuous, in years)?
 ## Define Variables of Interest, Analysis DF
@@ -327,7 +331,10 @@ fit_h3 <- lmFit(logexpressionmatrix, analysis3)
 fit_h3 <- eBayes(fit_h3)
 
 ## Fit Results
-results_h3<- topTable(fit_h3, coef = "Age", adjust.method = "BH", number = Inf)
+## Dont sort so you can add gene names back
+results_h3 <- topTable(fit_h3, coef = "Age", adjust.method = "BH", number = Inf, sort.by = "none")
+results_h3$Gene <- rownames(fit_h3)
+
 
 ## Filter Significance by Benjamini-Hochberg Correction for Multiple Comparisons
 results_h3$Significant <- ifelse(results_h3$adj.P.Val <= 0.05, "Significant", "Not Significant")
@@ -415,7 +422,7 @@ ggplot(results_i4, aes(x = logFC, y = -log10(adj.P.Val), color = colorcoding)) +
 
 PCA, UMAP and t-SNE were all used on the significant age gene transcript sets in order to visualize trends. Color coding was used to visualize how variables of interest related to dimensionality vectors. Age demonstrated the most visually compelling trend, as would be expected on age dataset.
 
-```{r}## Start here}
+```{r}
 ## PCA for Age: 
 ## Extract significantly different age (3325 sig genes)
 sigagegenes <- results_h3[results_h3$Significant == "Significant", ]
@@ -739,22 +746,20 @@ ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = BMI)) +
 
 ```
 
-## Pathway Analysis for Followup Visit Age
+## Pathway Analysis for Age
 
 Several immunologically related pathways were differentially expressed by age in participants with PAH.
 
 ```{r, warn = FALSE}
-sigagegenes1 <- results_h5[results_h5$Significant == "Significant", ]
-sigagegenenames1 <- rownames(sigagegenes1)
-sigagegenes1$Gene <- rownames(sigagegenes1)
+sigagegenes<- results_h3[results_h3$Significant == "Significant", ]
 entrez <- bitr(
-  sigagegenes1$Gene,
+  sigagegenes$Gene,
   fromType = "ENSEMBL",
   toType = "ENTREZID",
   OrgDb = org.Hs.eg.db
 )
 
-sigagegenes1 <- merge(sigagegenes1, entrez, by.x = "Gene", by.y = "ENSEMBL", all.x = TRUE)
+sigagegenes1 <- merge(sigagegenes, entrez, by.x = "Gene", by.y = "ENSEMBL", all.x = TRUE)
 
 ## create new df without NA
 sigagegenes2 <- sigagegenes1[!is.na(sigagegenes1$ENTREZID), ]
@@ -778,45 +783,7 @@ dotplot(gopathanalysis,
   )
 
 
-```
 
-## BMI Pathway Analysis
-
-Briefly looking at BMI, three pathways were significantly differentially expressed, including neuromuscular and GPCR signaling.
-
-```{r, warn = FALSE}
-sigbmigenes <- results_i4[results_i4$Significant == "Significant", ]
-sigbmigenenames1 <- rownames(sigbmigenes)
-sigbmigenes$Gene <- rownames(sigbmigenes)
-entrez <- bitr(
-  sigbmigenes$Gene,
-  fromType = "ENSEMBL",
-  toType = "ENTREZID",
-  OrgDb = org.Hs.eg.db
-)
-
-sigbmigenes <- merge(sigbmigenes, entrez, by.x = "Gene", by.y = "ENSEMBL", all.x = TRUE)
-
-## 25% missing, create new df without NA
-sigbmigenes2 <- sigbmigenes[!is.na(sigbmigenes$ENTREZID), ]
-gopathanalysisbmi <- enrichGO(
-  gene = sigbmigenes2$ENTREZID, 
-  OrgDb = org.Hs.eg.db, 
-  keyType = "ENTREZID",
-  ont = "BP",
-  pAdjustMethod = "BH",
-  pvalueCutoff = 0.05
-)
-
-dotplot(gopathanalysisbmi, 
-        showCategory = 8,            
-        title = "GO Pathway Analysis for BMI") +
-  theme_minimal() + 
-  theme(
-    legend.text = element_text(size = 6),
-    legend.title = element_text(size = 6),
-    axis.text = element_text(size = 6)
-  )
 
 ```
 
