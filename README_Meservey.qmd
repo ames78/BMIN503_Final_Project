@@ -167,7 +167,7 @@ ggplot(tsne_df, aes(x = tSNE1, y = tSNE2, color = arm)) +
 
 ```
 
-## Pathway Analysis 
+## Pathway Analysis
 
 ```{r}
 ## translate and merge gene references:
